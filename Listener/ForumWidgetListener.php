@@ -12,12 +12,12 @@
 namespace Claroline\ForumBundle\Listener;
 
 use Claroline\CoreBundle\Event\DisplayWidgetEvent;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use JMS\DiExtraBundle\Annotation as DI;
 
 /**
- * @DI\Service(scope="request")
+ * @DI\Service()
  */
 class ForumWidgetListener
 {
@@ -26,16 +26,13 @@ class ForumWidgetListener
 
     /**
      * @DI\InjectParams({
-     *     "request"    = @DI\Inject("request"),
+     *     "requeststack"    = @DI\Inject("request_stack"),
      *     "httpKernel" = @DI\Inject("http_kernel"),
      * })
      */
-    public function __construct(
-        Request $request,
-        HttpKernelInterface $httpKernel
-    )
+    public function __construct(RequestStack $requeststack, HttpKernelInterface $httpKernel)
     {
-        $this->request = $request;
+        $this->request = $requeststack->getCurrentRequest();
         $this->httpKernel = $httpKernel;
     }
 
@@ -46,14 +43,17 @@ class ForumWidgetListener
      */
     public function onDisplay(DisplayWidgetEvent $event)
     {
+        if (!$this->request) {
+            throw new \Exception("There is no request");
+        }
+
         $widgetInstance = $event->getInstance();
         $workspace = $widgetInstance->getWorkspace();
         $params = array();
 
         if (is_null($workspace)) {
             $params['_controller'] = 'ClarolineForumBundle:Forum:forumsDesktopWidget';
-        }
-        else {
+        } else {
             $params['_controller'] = 'ClarolineForumBundle:Forum:forumsWorkspaceWidget';
             $params['workspaceId'] = $workspace->getId();
         }
