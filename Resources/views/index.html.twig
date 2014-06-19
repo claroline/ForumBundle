@@ -19,7 +19,7 @@
             <div class="col-md-8">
                 {% if isModerator %}
                 <a class="btn btn-primary" href="{{ _path('claro_forum_form_category_creation', {'forum': _resource.getId()}) }}">
-                    <i class="icon-plus"></i> {{ 'new_category'|trans({}, 'forum') }}
+                    <i class="fa fa-plus"></i> {{ 'new_category'|trans({}, 'forum') }}
                 </a>
                 {% endif %}
                 {% if is_mailer_available() %}
@@ -39,7 +39,7 @@
                    <input class="form-control" type="text" id="search-items-txt" placeholder="{{ 'search'|trans({}, 'platform') }}" value="{{ search }}">
                     <span class="input-group-btn">
                         <button class="filter btn btn-default" type="button" id="search-button">
-                            <i class="icon-search"></i>
+                            <i class="fa fa-search"></i>
                         </button>
                     </span>
                 </div>
@@ -68,7 +68,7 @@
                             </a>
                             {% if isModerator %}
                                 <a class="pull-right" href="{{ path('claro_forum_edit_category_form', {'category': category['id']}) }}">
-                                    <i class="icon-pencil"></i> {{ 'edit' | trans({}, 'platform') }}
+                                    <i class="fa fa-pencil"></i> {{ 'edit' | trans({}, 'platform') }}
                                 </a>
                            {% endif %}
                             <br>
@@ -85,7 +85,7 @@
                         {% if isModerator %}
                             <td>
                                 <a id="delete-category" href="{{ path('claro_forum_delete_category', {'category': category['id']}) }}">
-                                    <i class="icon-trash"></i> {{ 'delete' | trans({}, 'platform') }}
+                                    <i class="fa fa-trash-o"></i> {{ 'delete' | trans({}, 'platform') }}
                                 </a>
                             </td>
                         {% endif %}
