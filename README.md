@@ -1,7 +1,10 @@
 Forum plugin for Claroline
 --------------------------
 
-[![Build Status](https://travis-ci.org/claroline/ForumBundle.svg?branch=master)](https://travis-ci.org/claroline/ForumBundle)
+WARNING
+-------
+
+**DEVELOPMENT HAS MOVED TO [claroline/Distribution](http://github.com/claroline/Distribution). THIS REPOSITORY IS NO LONGER MAINTAINED.**
 
 Installation
 ------------
